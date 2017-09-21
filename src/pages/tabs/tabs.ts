@@ -1,19 +1,36 @@
-import { Component } from '@angular/core';
-
-import { AboutPage } from '../about/about';
-import { ContactPage } from '../contact/contact';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, Tabs } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { SettingPage } from '../setting/setting';
+import { BackButtonService } from "../../services/back-button.service";
 
 @Component({
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
 
-  tab1Root = HomePage;
-  tab2Root = AboutPage;
-  tab3Root = ContactPage;
+  tabRoots: Object[]
+  @ViewChild('myTabs') 
+  tabRef: Tabs;
 
-  constructor() {
+  constructor(public backButtonService: BackButtonService,
+              private platform: Platform
+              ) {
+  	this.tabRoots = [
+	  	{
+	  		root: HomePage,
+	  		tabTitle: 'Home',
+	  		tabIcon: 'home'
+	  	},
+	  	{
+	  		root: SettingPage,
+	  		tabTitle: 'Setting',
+	  		tabIcon: 'person'
+	  	}  	
+  	];
 
+  	platform.ready().then(() => {
+        this.backButtonService.registerBackButtonAction(this.tabRef);
+    });
   }
 }
