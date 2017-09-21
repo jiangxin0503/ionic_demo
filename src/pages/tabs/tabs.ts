@@ -3,6 +3,7 @@ import { Platform, Tabs } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { SettingPage } from '../setting/setting';
 import { BackButtonService } from "../../services/back-button.service";
+import { BarcodescannerPage } from '../barcodescanner/barcodescanner';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -26,7 +27,12 @@ export class TabsPage {
 	  		root: SettingPage,
 	  		tabTitle: 'Setting',
 	  		tabIcon: 'person'
-	  	}  	
+	  	},
+      {
+        root: BarcodescannerPage,
+        tabTitle: 'Scan',
+        tabIcon: 'barcode'
+      }  	
   	];
 
   	platform.ready().then(() => {
